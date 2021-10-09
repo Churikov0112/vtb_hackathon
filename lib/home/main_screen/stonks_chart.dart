@@ -22,7 +22,7 @@ class _StonksChartState extends State<StonksChart> {
   SfCartesianChart _buildHiloOpenClose() {
     return SfCartesianChart(
       plotAreaBorderWidth: 0,
-      title: ChartTitle(text: '2021'),
+      title: ChartTitle(text: ''),
       primaryXAxis: DateTimeAxis(
           dateFormat: DateFormat.MMM(),
           interval: 3,

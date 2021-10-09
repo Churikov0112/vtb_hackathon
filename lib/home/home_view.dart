@@ -26,22 +26,6 @@ class HomeView extends StatelessWidget {
                   ? const FinanceView()
                   : (page == "Прочее")
                       ? const OtherView()
-                      // // ? SettingsView()
-                      // // : (page == "profile_myself")
-                      // //     ? ProfileMyselfView()
-                      // //     : (page == "edit_profile")
-                      // //         ? EditProfileView()
-                      // //         : (page == "language")
-                      // //             ? LanguageView()
-                      // //             : (page == "measures")
-                      // //                 ? MeasuresView()
-                      // //                 : (page == "blocked_users")
-                      // //                     ? BlockedUsersView()
-                      // //                     : (page == "search_filter")
-                      // //                         ? SearchFilterView()
-                      // //                         : (page ==
-                      // //                                 "another_user_profile")
-                      // //                             ? AnotherUserProfileView()
                       : Container(),
     );
   }

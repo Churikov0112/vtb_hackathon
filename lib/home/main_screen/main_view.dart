@@ -10,7 +10,10 @@ import 'package:vtb_hackathon/widgets/square_button.dart';
 class MainView extends StatelessWidget {
   const MainView({Key? key}) : super(key: key);
 
-  Widget buildList(BuildContext context, List<StonksItem> data) {
+  Widget buildList(
+    BuildContext context,
+    List<StonksItem> data,
+  ) {
     return ListView.builder(
       padding: EdgeInsets.zero,
       itemCount: data.length,
