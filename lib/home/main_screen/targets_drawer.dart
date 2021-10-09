@@ -2,48 +2,79 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/consts/vtb_colors.dart';
 import 'package:vtb_hackathon/data/player/player.dart';
+import 'package:vtb_hackathon/widgets/long_button.dart';
 
 class TargetsDrawer extends StatelessWidget {
   Widget targetListTile(
     String title,
     double cost,
+    BuildContext context,
   ) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
-      child: Card(
-        elevation: 5,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+      child: Container(
+        decoration: const BoxDecoration(
+            color: VTBColors.color5,
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                const Text(
-                  'Цель: ',
-                  style: TextStyle(
-                    fontSize: 16,
+                ],
+              ),
+              const SizedBox(height: 10),
+
+              // Стоимость
+              Row(
+                children: [
+                  Text(
+                    Provider.of<Player>(context).freeMoney.toStringAsFixed(2) +
+                        ' / ',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                Text(
-                  cost.toStringAsFixed(2),
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    cost.toStringAsFixed(2) + ' ₽',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
+                ],
+              ),
+
+              Provider.of<Player>(context).freeMoney >= cost
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: LongButton(
+                          VTBColors.color7,
+                          true,
+                          const Text(
+                            'Выполнить',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          )),
+                    )
+                  : Container(),
+            ],
+          ),
         ),
       ),
     );
@@ -59,7 +90,7 @@ class TargetsDrawer extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
           Container(
-            color: VTBColors.color3,
+            color: VTBColors.color5,
             height: 120,
             width: double.infinity,
             padding: const EdgeInsets.all(20),
@@ -73,9 +104,12 @@ class TargetsDrawer extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 20),
-          targetListTile(Provider.of<Player>(context).target,
-              Provider.of<Player>(context).targetCost),
+          const SizedBox(height: 10),
+          targetListTile(
+            Provider.of<Player>(context).target,
+            Provider.of<Player>(context).targetCost,
+            context,
+          ),
         ],
       ),
     );

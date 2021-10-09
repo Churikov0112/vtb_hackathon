@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeViewModel with ChangeNotifier {
-  String _selectedPage = "Главный";
+  String _selectedPage = "Лента";
 
   String get selectedPage {
     String copy = _selectedPage;

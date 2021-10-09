@@ -5,7 +5,7 @@ import 'package:vtb_hackathon/data/stonks/stonks_item.dart';
 
 class Player with ChangeNotifier {
   String _target = 'Купить машину';
-  double _targetCost = 0;
+  double _targetCost = 800000;
 
   String get target {
     String copy = _target;
