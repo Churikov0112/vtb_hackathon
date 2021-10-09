@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/consts/vtb_colors.dart';
+import 'package:vtb_hackathon/data/companies/gazprom.dart';
 import 'package:vtb_hackathon/home/main_screen/main_view_model.dart';
 import 'package:vtb_hackathon/home/main_screen/stonks_chart.dart';
 
@@ -38,7 +39,7 @@ class StonksItemView extends StatelessWidget {
                   Text(
                     stonks[index].name,
                     style: const TextStyle(
-                      fontSize: 28,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: VTBColors.color5,
                     ),
@@ -48,9 +49,9 @@ class StonksItemView extends StatelessWidget {
             ),
           ),
 
-          const Padding(
-            padding: EdgeInsets.only(right: 30, left: 15, top: 30),
-            child: StonksChart(),
+          Padding(
+            padding: const EdgeInsets.only(right: 30, left: 15, top: 30),
+            child: StonksChart('Газпром'),
           ),
 
           // Цена на момент покупки
@@ -95,7 +96,12 @@ class StonksItemView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  stonks[index].nowAmount.toStringAsFixed(2) + " ₽",
+                  Provider.of<Gazprom>(context)
+                      .stonksData
+                      .last
+                      .open
+                      .toStringAsFixed(
+                          2), // stonks[index].nowAmount.toStringAsFixed(2) + " ₽",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -147,7 +153,11 @@ class StonksItemView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  stonks[index].percentOfIncreasing.toStringAsFixed(3) + " %",
+                  ((Provider.of<Gazprom>(context).stonksData.last.open -
+                              stonks[index].buyAmount) /
+                          stonks[index].buyAmount)
+                      .toStringAsFixed(2),
+                  //stonks[index].percentOfIncreasing.toStringAsFixed(3) + " %",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -173,10 +183,15 @@ class StonksItemView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  ((stonks[index].nowAmount - stonks[index].buyAmount) *
+                  ((Provider.of<Gazprom>(context).stonksData.last.open -
+                                  stonks[index].buyAmount) *
                               stonks[index].counter)
                           .toStringAsFixed(2) +
                       " ₽",
+                  // ((stonks[index].nowAmount - stonks[index].buyAmount) *
+                  //             stonks[index].counter)
+                  //         .toStringAsFixed(2) +
+                  //     " ₽",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

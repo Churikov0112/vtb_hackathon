@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vtb_hackathon/data/companies/gazprom.dart';
 
 class MainViewModel with ChangeNotifier {
   // ! Ниже идет все для Date
@@ -21,397 +23,403 @@ class MainViewModel with ChangeNotifier {
   // список купленных акций(включает название фирм, ссылку на картинку, цена акицй при покупке
   // цена акций сегодня, количество купленных акций и данные о цене акций за последнее время)
   // ignore: prefer_final_fields
-  List<StonksItem> _stonks = [
+  List<StonksItem> stonks = [
     StonksItem(
-      'Газпром',
-      'https://www.gazprom.ru/f/1/gazprom-logo-ru-3.png',
-      352.17,
-      366.17,
-      1,
+      name: 'Газпром',
+      buyAmount: 112.17,
+      counter: 1,
     ),
-    StonksItem(
-      'Apple',
-      'https://clck.ru/Y6qVx',
-      9891.01,
-      10197.46,
-      10,
-    ),
-    StonksItem(
-      'Microsoft',
-      'https://pbs.twimg.com/profile_images/1072427015612063744/H2-TQKDY.jpg',
-      20000.17,
-      21164.53,
-      1,
-    ),
-    StonksItem(
-      'РКК "Энергия"',
-      'https://clck.ru/Y6qdG',
-      8000,
-      7290.00,
-      1,
-    ),
-    StonksItem(
-      'Coca Cola',
-      'https://clck.ru/Y6xkc',
-      850,
-      861.76,
-      100,
-    ),
-    StonksItem(
-      'Яндекс',
-      'https://clck.ru/Y6xyf',
-      5600,
-      5701.60,
-      1,
-    ),
-    StonksItem(
-      'Bank of America',
-      'https://clck.ru/Y6yfc',
-      3200,
-      3184.19,
-      10,
-    ),
-    StonksItem(
-      'Tesla',
-      'https://clck.ru/Y6yjJ',
-      50000,
-      56408.47,
-      1,
-    ),
-  ];
 
-  List<StonksItem> get stonks {
-    List<StonksItem> copy = _stonks;
-    return copy;
-  }
+    // StonksItem(
+    //   name: 'Apple',
+    //   imageURI: 'https://clck.ru/Y6qVx',
+    //   buyAmount: 9891.01,
+    //   nowAmount: 10197.46,
+    //   counter: 10,
+    //   stonksData: <ChartSampleData>[
+    //     ChartSampleData(
+    //         x: DateTime(2020, 01, 11),
+    //         open: 9898.97,
+    //         high: 10981.19,
+    //         low: 9598.36,
+    //         close: 9798.13),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 01, 18),
+    //         open: 9898.41,
+    //         high: 10981.46,
+    //         low: 9398.42,
+    //         close: 10981.42),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 01, 25),
+    //         open: 10981.52,
+    //         high: 10981.53,
+    //         low: 9298.39,
+    //         close: 9798.34),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 02, 01),
+    //         open: 9698.47,
+    //         high: 9798.33,
+    //         low: 9398.69,
+    //         close: 9498.02),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 02, 08),
+    //         open: 9398.13,
+    //         high: 9698.35,
+    //         low: 9298.59,
+    //         close: 9398.99),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 02, 15),
+    //         open: 9198.02,
+    //         high: 9498.89,
+    //         low: 9098.61,
+    //         close: 9298.04),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 02, 22),
+    //         open: 9898.0237,
+    //         high: 9898.0237,
+    //         low: 9898.0237,
+    //         close: 9898.0237),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 02, 29),
+    //         open: 9998.86,
+    //         high: 10986.75,
+    //         low: 9998.65,
+    //         close: 10986.01),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 03, 07),
+    //         open: 10982.39,
+    //         high: 10982.83,
+    //         low: 10980.15,
+    //         close: 10982.26),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 03, 14),
+    //         open: 10981.91,
+    //         high: 10986.5,
+    //         low: 10981.78,
+    //         close: 10985.92),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 03, 21),
+    //         open: 10985.93,
+    //         high: 10987.65,
+    //         low: 10984.89,
+    //         close: 10985.67),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 03, 28),
+    //         open: 10986,
+    //         high: 11980.42,
+    //         low: 10984.88,
+    //         close: 10989.99),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 04, 04),
+    //         open: 11980.42,
+    //         high: 11982.19,
+    //         low: 10988.121,
+    //         close: 10988.66),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 04, 11),
+    //         open: 10988.97,
+    //         high: 11982.39,
+    //         low: 10988.66,
+    //         close: 10989.85),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 04, 18),
+    //         open: 10988.89,
+    //         high: 10988.95,
+    //         low: 10984.62,
+    //         close: 10985.68),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 04, 25),
+    //         open: 10985,
+    //         high: 10985.65,
+    //         low: 9298.51,
+    //         close: 9398.74),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 05, 02),
+    //         open: 9398.965,
+    //         high: 9598.9,
+    //         low: 9198.85,
+    //         close: 9298.72),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 05, 09),
+    //         open: 9398,
+    //         high: 9398.77,
+    //         low: 8998.47,
+    //         close: 9098.52),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 05, 16),
+    //         open: 9298.39,
+    //         high: 9598.43,
+    //         low: 9198.65,
+    //         close: 9598.22),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 05, 23),
+    //         open: 9598.87,
+    //         high: 10980.73,
+    //         low: 9598.67,
+    //         close: 10980.35),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 05, 30),
+    //         open: 9998.6,
+    //         high: 10980.4,
+    //         low: 9698.63,
+    //         close: 9798.92),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 06, 06),
+    //         open: 9798.99,
+    //         high: 10981.89,
+    //         low: 9798.55,
+    //         close: 9898.83),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 06, 13),
+    //         open: 9898.69,
+    //         high: 9998.12,
+    //         low: 9598.3,
+    //         close: 9598.33),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 06, 20),
+    //         open: 9698,
+    //         high: 9698.89,
+    //         low: 9298.65,
+    //         close: 9398.4),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 06, 27),
+    //         open: 9398,
+    //         high: 9698.465,
+    //         low: 9198.5,
+    //         close: 9598.89),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 07, 04),
+    //         open: 9598.39,
+    //         high: 9698.89,
+    //         low: 9498.37,
+    //         close: 9698.68),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 07, 11),
+    //         open: 9698.75,
+    //         high: 9998.3,
+    //         low: 9698.73,
+    //         close: 9898.78),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 07, 18),
+    //         open: 9898.7,
+    //         high: 10981,
+    //         low: 9898.31,
+    //         close: 9898.66),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 07, 25),
+    //         open: 9898.25,
+    //         high: 10984.55,
+    //         low: 9698.42,
+    //         close: 10984.21),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 08, 01),
+    //         open: 10984.41,
+    //         high: 10987.65,
+    //         low: 10984,
+    //         close: 10987.48),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 08, 08),
+    //         open: 10987.52,
+    //         high: 10988.94,
+    //         low: 10987.16,
+    //         close: 10988.18),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 08, 15),
+    //         open: 10988.14,
+    //         high: 11980.23,
+    //         low: 10988.08,
+    //         close: 10989.36),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 08, 22),
+    //         open: 10988.86,
+    //         high: 10989.32,
+    //         low: 10986.31,
+    //         close: 10986.94),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 08, 29),
+    //         open: 10986.62,
+    //         high: 10988,
+    //         low: 10985.5,
+    //         close: 10987.73),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 09, 05),
+    //         open: 10987.9,
+    //         high: 10988.76,
+    //         low: 10983.13,
+    //         close: 10983.13),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 09, 12),
+    //         open: 10982.65,
+    //         high: 11986.13,
+    //         low: 10982.53,
+    //         close: 11984.92),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 09, 19),
+    //         open: 11985.19,
+    //         high: 11986.18,
+    //         low: 11981.55,
+    //         close: 11982.71),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 09, 26),
+    //         open: 11981.64,
+    //         high: 11984.64,
+    //         low: 11981.55,
+    //         close: 11983.05),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 10, 03),
+    //         open: 11982.71,
+    //         high: 11984.56,
+    //         low: 11982.28,
+    //         close: 11984.06),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 10, 10),
+    //         open: 11985.02,
+    //         high: 11988.69,
+    //         low: 11984.72,
+    //         close: 11987.63),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 10, 17),
+    //         open: 11987.33,
+    //         high: 11988.21,
+    //         low: 11983.8,
+    //         close: 11986.6),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 10, 24),
+    //         open: 11987.1,
+    //         high: 11988.36,
+    //         low: 11983.31,
+    //         close: 11983.72),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 10, 31),
+    //         open: 11983.65,
+    //         high: 11984.23,
+    //         low: 10988.11,
+    //         close: 10988.84),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 11, 07),
+    //         open: 11980.08,
+    //         high: 11981.72,
+    //         low: 10985.83,
+    //         close: 10988.43),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 11, 14),
+    //         open: 10987.71,
+    //         high: 11980.54,
+    //         low: 10984.08,
+    //         close: 11980.06),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 11, 21),
+    //         open: 11985.42,
+    //         high: 11985.42,
+    //         low: 11985.42,
+    //         close: 11985.42),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 11, 28),
+    //         open: 11981.43,
+    //         high: 11982.465,
+    //         low: 10988.85,
+    //         close: 10989.9),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 12, 05),
+    //         open: 11980,
+    //         high: 11984.7,
+    //         low: 10988.25,
+    //         close: 11983.95),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 12, 12),
+    //         open: 11983.29,
+    //         high: 11986.73,
+    //         low: 11982.49,
+    //         close: 11985.97),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 12, 19),
+    //         open: 11985.8,
+    //         high: 11987.5,
+    //         low: 11985.59,
+    //         close: 11986.52),
+    //     ChartSampleData(
+    //         x: DateTime(2020, 12, 26),
+    //         open: 11986.52,
+    //         high: 11988.0166,
+    //         low: 11985.43,
+    //         close: 11985.82),
+    //     ChartSampleData(
+    //         x: DateTime(2021, 01, 03),
+    //         open: 11986.52,
+    //         high: 11988.0166,
+    //         low: 11985.43,
+    //         close: 11985.82),
+    //   ],
+    // ),
+    // StonksItem(
+
+    // ),
+    // StonksItem(
+    //   name: 'Microsoft',
+    //   imageURI: 'https://pbs.twimg.com/profile_images/1072427015612063744/H2-TQKDY.jpg',
+    //   buyAmount: 20000.17,
+    //   nowAmount: 21164.53,
+    //   counter: 1,
+    // ),
+    // StonksItem(
+    //   name: 'РКК "Энергия"',
+    //   imageURI: 'https://clck.ru/Y6qdG',
+    //   buyAmount: 8000,
+    //   nowAmount: 7290.00,
+    //  counter:  1,
+    // ),
+    // StonksItem(
+    //   name: 'Coca Cola',
+    //   imageURI: 'https://clck.ru/Y6xkc',
+    //   buyAmount: 850,
+    //   nowAmount: 861.76,
+    //   counter: 100,
+    // ),
+    // StonksItem(
+    //   name: 'Яндекс',
+    //   imageURI: 'https://clck.ru/Y6xyf',
+    //   buyAmount: 5600,
+    //   nowAmount: 5701.60,
+    //   counter: 1,
+    // ),
+    // StonksItem(
+    //   name: 'Bank of America',
+    //   imageURI: 'https://clck.ru/Y6yfc',
+    //   buyAmount: 3200,
+    //   nowAmount: 3184.19,
+    //   counter: 10,
+    // ),
+    // StonksItem(
+    //   name: 'Tesla',
+    //   imageURI: 'https://clck.ru/Y6yjJ',
+    //   buyAmount: 50000,
+    //   nowAmount: 56408.47,
+    //  counter:  1,
+    // ),
+  ];
 }
 
 // для отображения в main и stonks item
 class StonksItem {
-  StonksItem(
-      this.name, this.imageURI, this.buyAmount, this.nowAmount, this.counter);
+  StonksItem({
+    required this.name,
+    required this.buyAmount,
+    required this.counter,
+  });
 
+  // Название компании
   String name;
-  String imageURI;
+  // Цена покупки акций
   double buyAmount;
-  double nowAmount;
+  // Сколько акций в наличии
   int counter;
 
-  // как менялась стоимость за последнее время
-  final List<ChartSampleData> stonksData = <ChartSampleData>[
-    ChartSampleData(
-        x: DateTime(2016, 01, 11),
-        open: 98.97,
-        high: 101.19,
-        low: 95.36,
-        close: 97.13),
-    ChartSampleData(
-        x: DateTime(2016, 01, 18),
-        open: 98.41,
-        high: 101.46,
-        low: 93.42,
-        close: 101.42),
-    ChartSampleData(
-        x: DateTime(2016, 01, 25),
-        open: 101.52,
-        high: 101.53,
-        low: 92.39,
-        close: 97.34),
-    ChartSampleData(
-        x: DateTime(2016, 02, 01),
-        open: 96.47,
-        high: 97.33,
-        low: 93.69,
-        close: 94.02),
-    ChartSampleData(
-        x: DateTime(2016, 02, 08),
-        open: 93.13,
-        high: 96.35,
-        low: 92.59,
-        close: 93.99),
-    ChartSampleData(
-        x: DateTime(2016, 02, 15),
-        open: 91.02,
-        high: 94.89,
-        low: 90.61,
-        close: 92.04),
-    ChartSampleData(
-        x: DateTime(2016, 02, 22),
-        open: 98.0237,
-        high: 98.0237,
-        low: 98.0237,
-        close: 98.0237),
-    ChartSampleData(
-        x: DateTime(2016, 02, 29),
-        open: 99.86,
-        high: 106.75,
-        low: 99.65,
-        close: 106.01),
-    ChartSampleData(
-        x: DateTime(2016, 03, 07),
-        open: 102.39,
-        high: 102.83,
-        low: 100.15,
-        close: 102.26),
-    ChartSampleData(
-        x: DateTime(2016, 03, 14),
-        open: 101.91,
-        high: 106.5,
-        low: 101.78,
-        close: 105.92),
-    ChartSampleData(
-        x: DateTime(2016, 03, 21),
-        open: 105.93,
-        high: 107.65,
-        low: 104.89,
-        close: 105.67),
-    ChartSampleData(
-        x: DateTime(2016, 03, 28),
-        open: 106,
-        high: 110.42,
-        low: 104.88,
-        close: 109.99),
-    ChartSampleData(
-        x: DateTime(2016, 04, 04),
-        open: 110.42,
-        high: 112.19,
-        low: 108.121,
-        close: 108.66),
-    ChartSampleData(
-        x: DateTime(2016, 04, 11),
-        open: 108.97,
-        high: 112.39,
-        low: 108.66,
-        close: 109.85),
-    ChartSampleData(
-        x: DateTime(2016, 04, 18),
-        open: 108.89,
-        high: 108.95,
-        low: 104.62,
-        close: 105.68),
-    ChartSampleData(
-        x: DateTime(2016, 04, 25),
-        open: 105,
-        high: 105.65,
-        low: 92.51,
-        close: 93.74),
-    ChartSampleData(
-        x: DateTime(2016, 05, 02),
-        open: 93.965,
-        high: 95.9,
-        low: 91.85,
-        close: 92.72),
-    ChartSampleData(
-        x: DateTime(2016, 05, 09),
-        open: 93,
-        high: 93.77,
-        low: 89.47,
-        close: 90.52),
-    ChartSampleData(
-        x: DateTime(2016, 05, 16),
-        open: 92.39,
-        high: 95.43,
-        low: 91.65,
-        close: 95.22),
-    ChartSampleData(
-        x: DateTime(2016, 05, 23),
-        open: 95.87,
-        high: 100.73,
-        low: 95.67,
-        close: 100.35),
-    ChartSampleData(
-        x: DateTime(2016, 05, 30),
-        open: 99.6,
-        high: 100.4,
-        low: 96.63,
-        close: 97.92),
-    ChartSampleData(
-        x: DateTime(2016, 06, 06),
-        open: 97.99,
-        high: 101.89,
-        low: 97.55,
-        close: 98.83),
-    ChartSampleData(
-        x: DateTime(2016, 06, 13),
-        open: 98.69,
-        high: 99.12,
-        low: 95.3,
-        close: 95.33),
-    ChartSampleData(
-        x: DateTime(2016, 06, 20),
-        open: 96,
-        high: 96.89,
-        low: 92.65,
-        close: 93.4),
-    ChartSampleData(
-        x: DateTime(2016, 06, 27),
-        open: 93,
-        high: 96.465,
-        low: 91.5,
-        close: 95.89),
-    ChartSampleData(
-        x: DateTime(2016, 07, 04),
-        open: 95.39,
-        high: 96.89,
-        low: 94.37,
-        close: 96.68),
-    ChartSampleData(
-        x: DateTime(2016, 07, 11),
-        open: 96.75,
-        high: 99.3,
-        low: 96.73,
-        close: 98.78),
-    ChartSampleData(
-        x: DateTime(2016, 07, 18),
-        open: 98.7,
-        high: 101,
-        low: 98.31,
-        close: 98.66),
-    ChartSampleData(
-        x: DateTime(2016, 07, 25),
-        open: 98.25,
-        high: 104.55,
-        low: 96.42,
-        close: 104.21),
-    ChartSampleData(
-        x: DateTime(2016, 08, 01),
-        open: 104.41,
-        high: 107.65,
-        low: 104,
-        close: 107.48),
-    ChartSampleData(
-        x: DateTime(2016, 08, 08),
-        open: 107.52,
-        high: 108.94,
-        low: 107.16,
-        close: 108.18),
-    ChartSampleData(
-        x: DateTime(2016, 08, 15),
-        open: 108.14,
-        high: 110.23,
-        low: 108.08,
-        close: 109.36),
-    ChartSampleData(
-        x: DateTime(2016, 08, 22),
-        open: 108.86,
-        high: 109.32,
-        low: 106.31,
-        close: 106.94),
-    ChartSampleData(
-        x: DateTime(2016, 08, 29),
-        open: 106.62,
-        high: 108,
-        low: 105.5,
-        close: 107.73),
-    ChartSampleData(
-        x: DateTime(2016, 09, 05),
-        open: 107.9,
-        high: 108.76,
-        low: 103.13,
-        close: 103.13),
-    ChartSampleData(
-        x: DateTime(2016, 09, 12),
-        open: 102.65,
-        high: 116.13,
-        low: 102.53,
-        close: 114.92),
-    ChartSampleData(
-        x: DateTime(2016, 09, 19),
-        open: 115.19,
-        high: 116.18,
-        low: 111.55,
-        close: 112.71),
-    ChartSampleData(
-        x: DateTime(2016, 09, 26),
-        open: 111.64,
-        high: 114.64,
-        low: 111.55,
-        close: 113.05),
-    ChartSampleData(
-        x: DateTime(2016, 10, 03),
-        open: 112.71,
-        high: 114.56,
-        low: 112.28,
-        close: 114.06),
-    ChartSampleData(
-        x: DateTime(2016, 10, 10),
-        open: 115.02,
-        high: 118.69,
-        low: 114.72,
-        close: 117.63),
-    ChartSampleData(
-        x: DateTime(2016, 10, 17),
-        open: 117.33,
-        high: 118.21,
-        low: 113.8,
-        close: 116.6),
-    ChartSampleData(
-        x: DateTime(2016, 10, 24),
-        open: 117.1,
-        high: 118.36,
-        low: 113.31,
-        close: 113.72),
-    ChartSampleData(
-        x: DateTime(2016, 10, 31),
-        open: 113.65,
-        high: 114.23,
-        low: 108.11,
-        close: 108.84),
-    ChartSampleData(
-        x: DateTime(2016, 11, 07),
-        open: 110.08,
-        high: 111.72,
-        low: 105.83,
-        close: 108.43),
-    ChartSampleData(
-        x: DateTime(2016, 11, 14),
-        open: 107.71,
-        high: 110.54,
-        low: 104.08,
-        close: 110.06),
-    ChartSampleData(
-        x: DateTime(2016, 11, 21),
-        open: 115.42,
-        high: 115.42,
-        low: 115.42,
-        close: 115.42),
-    ChartSampleData(
-        x: DateTime(2016, 11, 28),
-        open: 111.43,
-        high: 112.465,
-        low: 108.85,
-        close: 109.9),
-    ChartSampleData(
-        x: DateTime(2016, 12, 05),
-        open: 110,
-        high: 114.7,
-        low: 108.25,
-        close: 113.95),
-    ChartSampleData(
-        x: DateTime(2016, 12, 12),
-        open: 113.29,
-        high: 116.73,
-        low: 112.49,
-        close: 115.97),
-    ChartSampleData(
-        x: DateTime(2016, 12, 19),
-        open: 115.8,
-        high: 117.5,
-        low: 115.59,
-        close: 116.52),
-    ChartSampleData(
-        x: DateTime(2016, 12, 26),
-        open: 116.52,
-        high: 118.0166,
-        low: 115.43,
-        close: 115.82),
-  ];
+  String imageURI(BuildContext context) {
+    return Provider.of<Gazprom>(context, listen: false).imageURI;
+  }
 
-  // процент роста с момента покупки акции
-  double get percentOfIncreasing {
-    return (nowAmount != buyAmount)
-        ? 100 * (nowAmount - buyAmount) / buyAmount
-        : 0;
+  double percentOfIncreasing(BuildContext context) {
+    return Provider.of<Gazprom>(context, listen: false).percentOfIncreasing;
   }
 }
 

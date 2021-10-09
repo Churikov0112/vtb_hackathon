@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/consts/vtb_colors.dart';
+import 'package:vtb_hackathon/data/companies/gazprom.dart';
+import 'package:vtb_hackathon/data/system/date.dart';
 import 'package:vtb_hackathon/home/main_screen/main_view_model.dart';
 import 'package:vtb_hackathon/home/main_screen/stonks_item_view.dart';
 import 'package:vtb_hackathon/widgets/long_button.dart';
@@ -35,7 +38,7 @@ class MainView extends StatelessWidget {
                   shape: BoxShape.rectangle,
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   image: DecorationImage(
-                    image: NetworkImage(data[index].imageURI),
+                    image: NetworkImage(data[index].imageURI(context)),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -44,13 +47,15 @@ class MainView extends StatelessWidget {
               Text(data[index].name),
               const Expanded(child: SizedBox()),
               Text(
-                data[index].percentOfIncreasing >= 0
+                data[index].percentOfIncreasing(context) >= 0
                     ? "+ " +
-                        data[index].percentOfIncreasing.toStringAsFixed(3) +
+                        data[index]
+                            .percentOfIncreasing(context)
+                            .toStringAsFixed(3) +
                         " %"
                     : "- " +
                         data[index]
-                            .percentOfIncreasing
+                            .percentOfIncreasing(context)
                             .abs()
                             .toStringAsFixed(3) +
                         " %",
@@ -59,7 +64,7 @@ class MainView extends StatelessWidget {
               SizedBox(
                 height: 20,
                 width: 20,
-                child: data[index].percentOfIncreasing >= 0
+                child: data[index].percentOfIncreasing(context) >= 0
                     ? Image.asset('lib/assets/images/profit.png')
                     : Image.asset('lib/assets/images/not_stonks.png'),
               ),
@@ -142,16 +147,17 @@ class MainView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 15, top: 57),
               child: Row(
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Текущая дата: ',
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
                   Text(
-                    '9.10.2021',
-                    style: TextStyle(
+                    DateFormat('dd.MM.yyyy')
+                        .format(Provider.of<Date>(context).currentDate),
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -238,26 +244,31 @@ class MainView extends StatelessWidget {
         // кнопка перемотки времени
         Padding(
           padding: const EdgeInsets.only(bottom: 15),
-          child: LongButton(
-            VTBColors.color5,
-            true,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Перемотать время',
-                  style: TextStyle(
+          child: InkWell(
+            onTap: () {
+              Provider.of<Date>(context, listen: false).rollDate(context);
+            },
+            child: LongButton(
+              VTBColors.color5,
+              true,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Перемотать время',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  SvgPicture.asset(
+                    'lib/assets/icons/time.svg',
                     color: Colors.white,
                   ),
-                ),
-                const SizedBox(width: 5),
-                SvgPicture.asset(
-                  'lib/assets/icons/time.svg',
-                  color: Colors.white,
-                ),
-              ],
+                ],
+              ),
+              Colors.white,
             ),
-            Colors.white,
           ),
         ),
       ],

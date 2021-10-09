@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vtb_hackathon/data/companies/gazprom.dart';
+import 'package:vtb_hackathon/data/system/date.dart';
 import 'package:vtb_hackathon/home/feed_screen/feed_view_model.dart';
 import 'package:vtb_hackathon/home/finance_screen/finance_view_model.dart';
 import 'package:vtb_hackathon/home/home_view.dart';
@@ -32,6 +34,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: OtherViewModel(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Date(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Gazprom(),
         ),
       ],
       child: MaterialApp(
