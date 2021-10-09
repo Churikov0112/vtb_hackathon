@@ -2,9 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/data/companies/gazprom.dart';
 import 'package:vtb_hackathon/data/stonks/stonks_item.dart';
-import 'package:vtb_hackathon/home/home_view_model.dart';
 
 class Player with ChangeNotifier {
+  String _target = 'Купить машину';
+  double _targetCost = 0;
+
+  String get target {
+    String copy = _target;
+    return copy;
+  }
+
+  void setTarget(String newTarget) {
+    _target = newTarget;
+    notifyListeners();
+  }
+
+  double get targetCost {
+    double copy = _targetCost;
+    return copy;
+  }
+
+  void setTargetCost(String newTargetCost) {
+    _target = newTargetCost;
+    notifyListeners();
+  }
+
+  void checkTarget() {
+    if (_freeMoney > targetCost) {
+      print('victory!');
+    }
+  }
+
   double _safetyPillow = 0;
 
   double get safetyPillow {

@@ -4,9 +4,14 @@ import 'package:vtb_hackathon/data/stonks/chart_sample_data.dart';
 import 'package:vtb_hackathon/data/system/date.dart';
 
 class Gazprom with ChangeNotifier {
-  String name = 'Газпром';
+  static const String name = 'Газпром';
 
-  String imageURI = 'https://www.gazprom.ru/f/1/gazprom-logo-ru-3.png';
+  static const String imageURI =
+      'https://www.gazprom.ru/f/1/gazprom-logo-ru-3.png';
+
+  // static double lastStonkValue() {
+  //   return stonksData.last.open;
+  // }
 
   // ignore: prefer_final_fields
   List<ChartSampleData> _stonksData = <ChartSampleData>[

@@ -7,6 +7,7 @@ import 'package:vtb_hackathon/data/player/player.dart';
 import 'package:vtb_hackathon/data/stonks/stonks_item.dart';
 import 'package:vtb_hackathon/data/system/date.dart';
 import 'package:vtb_hackathon/home/main_screen/stonks_item_view.dart';
+import 'package:vtb_hackathon/home/main_screen/targets_drawer.dart';
 import 'package:vtb_hackathon/widgets/long_button.dart';
 import 'package:vtb_hackathon/widgets/square_button.dart';
 
@@ -115,31 +116,36 @@ class MainView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // Кнопка Цели
-            Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + 15,
-                left: 15,
-              ),
-              child: SquareButton(
-                Colors.transparent,
-                true,
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      'lib/assets/icons/target.svg',
-                      color: VTBColors.color5,
-                    ),
-                    const SizedBox(height: 5),
-                    const Text(
-                      'Цели',
-                      style: TextStyle(
+            GestureDetector(
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 15,
+                  left: 15,
+                ),
+                child: SquareButton(
+                  Colors.transparent,
+                  true,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        'lib/assets/icons/target.svg',
                         color: VTBColors.color5,
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 5),
+                      const Text(
+                        'Цели',
+                        style: TextStyle(
+                          color: VTBColors.color5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Colors.white,
                 ),
-                Colors.white,
               ),
             ),
 
@@ -174,9 +180,14 @@ class MainView extends StatelessWidget {
         Row(
           children: [
             const Expanded(child: SizedBox()),
-            const Text(
-              '1 000 000 ₽',
-              style: TextStyle(
+            Text(
+              (Provider.of<Player>(context).freeMoney +
+                          Provider.of<Player>(context).safetyPillow +
+                          Provider.of<Player>(context)
+                              .howMuchMoneyInStonks(context, stonks.length))
+                      .toStringAsFixed(2) +
+                  ' ₽',
+              style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
@@ -212,7 +223,8 @@ class MainView extends StatelessWidget {
               ),
             ),
             Text(
-              Provider.of<Player>(context).safetyPillow.toStringAsFixed(2),
+              Provider.of<Player>(context).safetyPillow.toStringAsFixed(2) +
+                  ' ₽',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -257,8 +269,9 @@ class MainView extends StatelessWidget {
             ),
             Text(
               Provider.of<Player>(context)
-                  .howMuchMoneyInStonks(context, stonks.length)
-                  .toStringAsFixed(2),
+                      .howMuchMoneyInStonks(context, stonks.length)
+                      .toStringAsFixed(2) +
+                  ' ₽',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -280,7 +293,7 @@ class MainView extends StatelessWidget {
               ),
             ),
             Text(
-              Provider.of<Player>(context).freeMoney.toStringAsFixed(2),
+              Provider.of<Player>(context).freeMoney.toStringAsFixed(2) + ' ₽',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -357,7 +370,6 @@ class MainView extends StatelessWidget {
                   ),
                 ],
               ),
-              Colors.white,
             ),
           ),
         ),

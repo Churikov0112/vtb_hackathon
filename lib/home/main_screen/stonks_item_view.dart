@@ -9,9 +9,9 @@ import 'package:vtb_hackathon/widgets/half_long_button.dart';
 
 class StonksItemView extends StatelessWidget {
   // ignore: use_key_in_widget_constructors
-  StonksItemView(this.index);
+  const StonksItemView(this.index);
 
-  int index;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class StonksItemView extends StatelessWidget {
             },
             child: Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + 15,
+                top: MediaQuery.of(context).padding.top + 27,
                 left: 15,
                 right: 15,
               ),

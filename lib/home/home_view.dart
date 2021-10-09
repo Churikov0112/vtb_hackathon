@@ -4,6 +4,7 @@ import 'package:vtb_hackathon/home/feed_screen/feed_view.dart';
 import 'package:vtb_hackathon/home/finance_screen/finance_view.dart';
 import 'package:vtb_hackathon/home/home_view_model.dart';
 import 'package:vtb_hackathon/home/main_screen/main_view.dart';
+import 'package:vtb_hackathon/home/main_screen/targets_drawer.dart';
 import 'package:vtb_hackathon/home/other_screen/other_view.dart';
 import 'package:vtb_hackathon/widgets/vtb_tabbar.dart';
 
@@ -17,6 +18,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     page = Provider.of<HomeViewModel>(context).selectedPage;
     return Scaffold(
+      drawer: TargetsDrawer(),
       bottomNavigationBar: Tabbar(page),
       body: (page == "Главный")
           ? const MainView()

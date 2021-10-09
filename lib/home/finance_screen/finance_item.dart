@@ -3,24 +3,16 @@ import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/data/companies/gazprom.dart';
 
 // класс для купленных пользователем акций
-class StonksItem {
-  StonksItem({
+class FinanceItem {
+  FinanceItem({
     required this.name,
     required this.buyAmount,
-    required this.counter,
   });
 
   // Название компании
   String name;
   // Цена покупки акций
   double buyAmount;
-  // Сколько акций в наличии
-  int counter;
-
-  String imageURI(BuildContext context) {
-    // TODO добавить другие компании
-    return Gazprom.imageURI;
-  }
 
   double percentOfIncreasing(BuildContext context) {
     // TODO добавить другие компании
