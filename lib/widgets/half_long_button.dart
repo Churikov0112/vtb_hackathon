@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HalfLongButton extends StatelessWidget {
-  HalfLongButton(
-      this.fillColor, this.isButtonEnable, this.title, this.titleTextColor,
-      {Key? key})
+  HalfLongButton(this.fillColor, this.isButtonEnable, this.title, {Key? key})
       : super(key: key);
 
   Color fillColor;
-  Color titleTextColor;
   Widget title;
   bool isButtonEnable;
 

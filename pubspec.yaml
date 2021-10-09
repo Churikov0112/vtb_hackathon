@@ -33,6 +33,8 @@ flutter:
     - lib/assets/icons/target.svg
     - lib/assets/icons/time.svg
     - lib/assets/icons/pie_chart.svg
+    - lib/assets/icons/dash.svg
+    - lib/assets/icons/plus.svg
     - lib/assets/icons/minus.svg
 
     - lib/assets/images/profit.png

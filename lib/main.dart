@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/data/companies/gazprom.dart';
+import 'package:vtb_hackathon/data/player/player.dart';
 import 'package:vtb_hackathon/data/system/date.dart';
 import 'package:vtb_hackathon/home/feed_screen/feed_view_model.dart';
 import 'package:vtb_hackathon/home/finance_screen/finance_view_model.dart';
 import 'package:vtb_hackathon/home/home_view.dart';
 import 'package:vtb_hackathon/home/home_view_model.dart';
-import 'package:vtb_hackathon/home/main_screen/main_view_model.dart';
 import 'package:vtb_hackathon/home/other_screen/other_view_model.dart';
 
 void main() {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           value: HomeViewModel(),
         ),
         ChangeNotifierProvider.value(
-          value: MainViewModel(),
+          value: Player(),
         ),
         ChangeNotifierProvider.value(
           value: FeedViewModel(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vtb_hackathon/data/stonks/chart_sample_data.dart';
 import 'package:vtb_hackathon/data/system/date.dart';
-import 'package:vtb_hackathon/home/main_screen/main_view_model.dart';
 
 class Gazprom with ChangeNotifier {
   String name = 'Газпром';

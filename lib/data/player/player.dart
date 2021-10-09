@@ -1,28 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/data/companies/gazprom.dart';
+import 'package:vtb_hackathon/data/stonks/stonks_item.dart';
+import 'package:vtb_hackathon/home/home_view_model.dart';
 
-class MainViewModel with ChangeNotifier {
-  // ! Ниже идет все для Date
+class Player with ChangeNotifier {
+  double _safetyPillow = 0;
 
-  // ignore: prefer_final_fields
-  DateTime _currentDate = DateTime.now();
-
-  DateTime get currentDate {
-    DateTime copy = _currentDate;
+  double get safetyPillow {
+    double copy = _safetyPillow;
     return copy;
   }
 
-  void timeRoll() {
-    _currentDate.add(const Duration(days: 1));
+  double _freeMoney = 100000;
+
+  double get freeMoney {
+    double copy = _freeMoney;
+    return copy;
+  }
+
+  void increaseSafetyPillow() {
+    _safetyPillow += _freeMoney * 0.1;
+    _freeMoney = _freeMoney * 0.9;
     notifyListeners();
   }
 
-  // ! Ниже идет все для Stonks
+  void decreaseSafetyPillow() {
+    _freeMoney += _safetyPillow * 0.1;
+    _safetyPillow = _safetyPillow * 0.9;
+    notifyListeners();
+  }
 
-  // список купленных акций(включает название фирм, ссылку на картинку, цена акицй при покупке
-  // цена акций сегодня, количество купленных акций и данные о цене акций за последнее время)
-  // ignore: prefer_final_fields
+  void buyStonk(
+    String name,
+    double buyAmount,
+  ) {
+    stonks.add(StonksItem(
+      name: name,
+      buyAmount: buyAmount,
+      counter: 1,
+    ));
+    _freeMoney -= buyAmount;
+    notifyListeners();
+  }
+
+  void sellStonk(
+    int index,
+    double sellAmount,
+    BuildContext context,
+  ) {
+    stonks.removeAt(index);
+    _freeMoney += sellAmount;
+
+    notifyListeners();
+  }
+
   List<StonksItem> stonks = [
     StonksItem(
       name: 'Газпром',
@@ -397,45 +429,14 @@ class MainViewModel with ChangeNotifier {
     //  counter:  1,
     // ),
   ];
-}
 
-// для отображения в main и stonks item
-class StonksItem {
-  StonksItem({
-    required this.name,
-    required this.buyAmount,
-    required this.counter,
-  });
-
-  // Название компании
-  String name;
-  // Цена покупки акций
-  double buyAmount;
-  // Сколько акций в наличии
-  int counter;
-
-  String imageURI(BuildContext context) {
-    return Provider.of<Gazprom>(context, listen: false).imageURI;
+  // сколько всего денег вложено в акции
+  // TODO добавить другие компании
+  double howMuchMoneyInStonks(
+    BuildContext context,
+    int gazpromCount,
+  ) {
+    return Provider.of<Gazprom>(context, listen: false).stonksData.last.open *
+        gazpromCount;
   }
-
-  double percentOfIncreasing(BuildContext context) {
-    return Provider.of<Gazprom>(context, listen: false).percentOfIncreasing;
-  }
-}
-
-// данные по ценам каждой акции за 1 день
-class ChartSampleData {
-  ChartSampleData({
-    required this.x,
-    required this.open,
-    required this.high,
-    required this.low,
-    required this.close,
-  });
-
-  DateTime x;
-  double open;
-  double high;
-  double low;
-  double close;
 }

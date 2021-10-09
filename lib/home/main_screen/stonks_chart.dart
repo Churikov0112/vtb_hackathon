@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vtb_hackathon/data/companies/gazprom.dart';
-import 'package:vtb_hackathon/home/main_screen/main_view_model.dart';
+import 'package:vtb_hackathon/data/stonks/chart_sample_data.dart';
 
 class StonksChart extends StatefulWidget {
   StonksChart(this.companyName);
@@ -19,6 +19,7 @@ class _StonksChartState extends State<StonksChart> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO добавить другие компании
     List<ChartSampleData> data = Provider.of<Gazprom>(context).stonksData;
     DateTime minDate = data[0].x;
     DateTime maxDate = data.last.x;
