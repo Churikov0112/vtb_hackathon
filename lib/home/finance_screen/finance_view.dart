@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/consts/vtb_colors.dart';
 import 'package:vtb_hackathon/data/companies/companies.dart';
+import 'package:vtb_hackathon/data/companies/company.dart';
 import 'package:vtb_hackathon/home/finance_screen/finance_item.dart';
 import 'package:vtb_hackathon/home/finance_screen/finance_item_view.dart';
 
@@ -10,11 +11,11 @@ class FinanceView extends StatelessWidget {
 
   Widget buildList(
     BuildContext context,
-    List<FinanceItem> data,
+    List<FinanceItem> stonks,
   ) {
     return ListView.builder(
       padding: EdgeInsets.zero,
-      itemCount: data.length,
+      itemCount: stonks.length,
       itemBuilder: (context, index) => stonksItem(
         context,
         Container(
@@ -34,24 +35,27 @@ class FinanceView extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   image: DecorationImage(
                     image: NetworkImage(
-                        data[index].imageURI(context, data[index].name)),
+                      stonks[index].imageURI(context, stonks[index].name),
+                    ),
                     fit: BoxFit.fill,
                   ),
                 ),
               ),
               const SizedBox(width: 10),
-              Text(data[index].name),
+              Text(stonks[index].name),
               const Expanded(child: SizedBox()),
               Text(
-                data[index].percentOfIncreasing(context, data[index].name) >= 0
+                stonks[index]
+                            .percentOfIncreasing(context, stonks[index].name) >=
+                        0
                     ? "+ " +
-                        data[index]
-                            .percentOfIncreasing(context, data[index].name)
+                        stonks[index]
+                            .percentOfIncreasing(context, stonks[index].name)
                             .toStringAsFixed(3) +
                         " %"
                     : "- " +
-                        data[index]
-                            .percentOfIncreasing(context, data[index].name)
+                        stonks[index]
+                            .percentOfIncreasing(context, stonks[index].name)
                             .abs()
                             .toStringAsFixed(3) +
                         " %",
@@ -60,8 +64,8 @@ class FinanceView extends StatelessWidget {
               SizedBox(
                 height: 20,
                 width: 20,
-                child: data[index]
-                            .percentOfIncreasing(context, data[index].name) >=
+                child: stonks[index]
+                            .percentOfIncreasing(context, stonks[index].name) >=
                         0
                     ? Image.asset('lib/assets/images/profit.png')
                     : Image.asset('lib/assets/images/not_stonks.png'),
@@ -70,7 +74,7 @@ class FinanceView extends StatelessWidget {
           ),
         ),
         VTBColors.color9,
-        index,
+        stonks[index],
       ),
     );
   }
@@ -79,13 +83,13 @@ class FinanceView extends StatelessWidget {
     BuildContext context,
     Widget child,
     Color color,
-    int index,
+    FinanceItem stonk,
   ) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute<void>(
-            builder: (BuildContext context) => FinanceItemView(index),
+            builder: (BuildContext context) => FinanceItemView(stonk),
           ),
         );
       },
@@ -105,13 +109,16 @@ class FinanceView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<FinanceItem> stonks = [
-      FinanceItem(
-        name: Provider.of<Companies>(context).companies[0].name,
-        buyAmount:
-            Provider.of<Companies>(context).companies[0].stonksData.last.open,
-      ),
-    ];
+    List<Company> companies = Provider.of<Companies>(context).companies;
+    List<FinanceItem> stonks = [];
+    for (var company in companies) {
+      stonks.add(
+        FinanceItem(
+          name: company.name,
+          buyAmount: company.stonksData.last.open,
+        ),
+      );
+    }
     return Scaffold(
       body: Column(
         children: [
@@ -137,10 +144,11 @@ class FinanceView extends StatelessWidget {
             ),
           ),
           SizedBox(
-              height: MediaQuery.of(context).size.height -
-                  (MediaQuery.of(context).padding.top) -
-                  135,
-              child: buildList(context, stonks)),
+            height: MediaQuery.of(context).size.height -
+                (MediaQuery.of(context).padding.top) -
+                135,
+            child: buildList(context, stonks),
+          ),
         ],
       ),
     );

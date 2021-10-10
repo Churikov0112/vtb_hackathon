@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/data/companies/companies.dart';
 import 'package:vtb_hackathon/data/companies/company.dart';
-import 'package:vtb_hackathon/data/companies/gazprom.dart';
 import 'package:vtb_hackathon/data/stonks/stonks_item.dart';
 
 class Player with ChangeNotifier {
