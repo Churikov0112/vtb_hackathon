@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vtb_hackathon/data/companies/companies.dart';
+import 'package:vtb_hackathon/data/companies/company.dart';
 import 'package:vtb_hackathon/data/companies/gazprom.dart';
 import 'package:vtb_hackathon/data/stonks/stonks_item.dart';
 
@@ -459,12 +461,20 @@ class Player with ChangeNotifier {
   ];
 
   // сколько всего денег вложено в акции
-  // TODO добавить другие компании
+  ///// TODO добавить другие компании
   double howMuchMoneyInStonks(
     BuildContext context,
-    int gazpromCount,
   ) {
-    return Provider.of<Gazprom>(context, listen: false).stonksData.last.open *
-        gazpromCount;
+    List<Company> companies =
+        Provider.of<Companies>(context, listen: false).companies;
+    double sum = 0;
+    for (var company in companies) {
+      int counter = 0;
+      for (var stonk in stonks) {
+        if (company.name == stonk.name) counter++;
+      }
+      sum += counter * company.stonksData.last.open;
+    }
+    return sum;
   }
 }

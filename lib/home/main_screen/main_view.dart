@@ -7,7 +7,6 @@ import 'package:vtb_hackathon/data/player/player.dart';
 import 'package:vtb_hackathon/data/stonks/stonks_item.dart';
 import 'package:vtb_hackathon/data/system/date.dart';
 import 'package:vtb_hackathon/home/main_screen/stonks_item_view.dart';
-import 'package:vtb_hackathon/home/main_screen/targets_drawer.dart';
 import 'package:vtb_hackathon/widgets/long_button.dart';
 import 'package:vtb_hackathon/widgets/square_button.dart';
 
@@ -39,7 +38,8 @@ class MainView extends StatelessWidget {
                   shape: BoxShape.rectangle,
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   image: DecorationImage(
-                    image: NetworkImage(data[index].imageURI(context)),
+                    image: NetworkImage(
+                        data[index].imageURI(context, data[index].name)),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -48,15 +48,15 @@ class MainView extends StatelessWidget {
               Text(data[index].name),
               const Expanded(child: SizedBox()),
               Text(
-                data[index].percentOfIncreasing(context) >= 0
+                data[index].percentOfIncreasing(context, data[index].name) >= 0
                     ? "+ " +
                         data[index]
-                            .percentOfIncreasing(context)
+                            .percentOfIncreasing(context, data[index].name)
                             .toStringAsFixed(3) +
                         " %"
                     : "- " +
                         data[index]
-                            .percentOfIncreasing(context)
+                            .percentOfIncreasing(context, data[index].name)
                             .abs()
                             .toStringAsFixed(3) +
                         " %",
@@ -65,7 +65,9 @@ class MainView extends StatelessWidget {
               SizedBox(
                 height: 20,
                 width: 20,
-                child: data[index].percentOfIncreasing(context) >= 0
+                child: data[index]
+                            .percentOfIncreasing(context, data[index].name) >=
+                        0
                     ? Image.asset('lib/assets/images/profit.png')
                     : Image.asset('lib/assets/images/not_stonks.png'),
               ),
@@ -184,7 +186,7 @@ class MainView extends StatelessWidget {
               (Provider.of<Player>(context).freeMoney +
                           Provider.of<Player>(context).safetyPillow +
                           Provider.of<Player>(context)
-                              .howMuchMoneyInStonks(context, stonks.length))
+                              .howMuchMoneyInStonks(context))
                       .toStringAsFixed(2) +
                   ' ₽',
               style: const TextStyle(
@@ -269,7 +271,7 @@ class MainView extends StatelessWidget {
             ),
             Text(
               Provider.of<Player>(context)
-                      .howMuchMoneyInStonks(context, stonks.length)
+                      .howMuchMoneyInStonks(context)
                       .toStringAsFixed(2) +
                   ' ₽',
               style: const TextStyle(

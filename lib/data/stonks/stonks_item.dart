@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vtb_hackathon/data/companies/gazprom.dart';
+import 'package:vtb_hackathon/data/companies/companies.dart';
 
 // класс для купленных пользователем акций
 class StonksItem {
@@ -17,13 +17,17 @@ class StonksItem {
   // Сколько акций в наличии
   int counter;
 
-  String imageURI(BuildContext context) {
+  String imageURI(BuildContext context, String name) {
     // TODO добавить другие компании
-    return Gazprom.imageURI;
+    return Provider.of<Companies>(context, listen: false)
+        .companies
+        .firstWhere((company) => company.name == name)
+        .imageURI;
   }
 
-  double percentOfIncreasing(BuildContext context) {
+  double percentOfIncreasing(BuildContext context, String name) {
     // TODO добавить другие компании
-    return Provider.of<Gazprom>(context, listen: false).percentOfIncreasing;
+    return Provider.of<Companies>(context, listen: false)
+        .percentOfIncreasing(name);
   }
 }

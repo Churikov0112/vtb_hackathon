@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/consts/vtb_colors.dart';
-import 'package:vtb_hackathon/data/companies/gazprom.dart';
+import 'package:vtb_hackathon/data/companies/companies.dart';
+import 'package:vtb_hackathon/home/finance_screen/finance_item.dart';
 import 'package:vtb_hackathon/home/finance_screen/finance_item_view.dart';
-import 'package:vtb_hackathon/home/finance_screen/finance_view_model.dart';
 
 class FinanceView extends StatelessWidget {
   const FinanceView({Key? key}) : super(key: key);
@@ -33,7 +33,8 @@ class FinanceView extends StatelessWidget {
                   shape: BoxShape.rectangle,
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   image: DecorationImage(
-                    image: NetworkImage(data[index].imageURI),
+                    image: NetworkImage(
+                        data[index].imageURI(context, data[index].name)),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -42,15 +43,15 @@ class FinanceView extends StatelessWidget {
               Text(data[index].name),
               const Expanded(child: SizedBox()),
               Text(
-                data[index].percentOfIncreasing(context) >= 0
+                data[index].percentOfIncreasing(context, data[index].name) >= 0
                     ? "+ " +
                         data[index]
-                            .percentOfIncreasing(context)
+                            .percentOfIncreasing(context, data[index].name)
                             .toStringAsFixed(3) +
                         " %"
                     : "- " +
                         data[index]
-                            .percentOfIncreasing(context)
+                            .percentOfIncreasing(context, data[index].name)
                             .abs()
                             .toStringAsFixed(3) +
                         " %",
@@ -59,7 +60,9 @@ class FinanceView extends StatelessWidget {
               SizedBox(
                 height: 20,
                 width: 20,
-                child: data[index].percentOfIncreasing(context) >= 0
+                child: data[index]
+                            .percentOfIncreasing(context, data[index].name) >=
+                        0
                     ? Image.asset('lib/assets/images/profit.png')
                     : Image.asset('lib/assets/images/not_stonks.png'),
               ),
@@ -104,9 +107,9 @@ class FinanceView extends StatelessWidget {
   Widget build(BuildContext context) {
     List<FinanceItem> stonks = [
       FinanceItem(
-        name: Gazprom.name,
-        imageURI: Gazprom.imageURI,
-        amount: Provider.of<Gazprom>(context).stonksData.last.open,
+        name: Provider.of<Companies>(context).companies[0].name,
+        buyAmount:
+            Provider.of<Companies>(context).companies[0].stonksData.last.open,
       ),
     ];
     return Scaffold(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/consts/vtb_colors.dart';
-import 'package:vtb_hackathon/data/companies/gazprom.dart';
+import 'package:vtb_hackathon/data/companies/companies.dart';
 import 'package:vtb_hackathon/data/player/player.dart';
 import 'package:vtb_hackathon/data/stonks/stonks_item.dart';
 import 'package:vtb_hackathon/home/main_screen/stonks_chart.dart';
@@ -102,7 +102,14 @@ class StonksItemView extends StatelessWidget {
                 Text(
                   // TODO добавить другие компании
 
-                  Provider.of<Gazprom>(context)
+                  Provider.of<Companies>(context)
+                      .companies
+                      .firstWhere((comp) =>
+                          comp.name ==
+                          Provider.of<Player>(context)
+                              .stonks
+                              .elementAt(index)
+                              .name)
                       .stonksData
                       .last
                       .open
@@ -160,7 +167,17 @@ class StonksItemView extends StatelessWidget {
                 ),
                 Text(
                   // TODO добавить другие компании
-                  ((Provider.of<Gazprom>(context).stonksData.last.open -
+                  ((Provider.of<Companies>(context)
+                                  .companies
+                                  .firstWhere((comp) =>
+                                      comp.name ==
+                                      Provider.of<Player>(context)
+                                          .stonks
+                                          .elementAt(index)
+                                          .name)
+                                  .stonksData
+                                  .last
+                                  .open -
                               stonks[index].buyAmount) /
                           stonks[index].buyAmount)
                       .toStringAsFixed(2),
@@ -192,7 +209,16 @@ class StonksItemView extends StatelessWidget {
                 Text(
                   // TODO добавить другие компании
 
-                  ((Provider.of<Gazprom>(context).stonksData.last.open -
+                  ((Provider.of<Companies>(context, listen: false)
+                                      .companies
+                                      .firstWhere((comp) =>
+                                          comp.name ==
+                                          Provider.of<Player>(context)
+                                              .stonks[index]
+                                              .name)
+                                      .stonksData
+                                      .last
+                                      .open -
                                   stonks[index].buyAmount) *
                               stonks[index].counter)
                           .toStringAsFixed(2) +
@@ -222,7 +248,13 @@ class StonksItemView extends StatelessWidget {
                     Navigator.of(context).pop();
                     Provider.of<Player>(context, listen: false).sellStonk(
                       index,
-                      Provider.of<Gazprom>(context, listen: false)
+                      Provider.of<Companies>(context, listen: false)
+                          .companies
+                          .firstWhere((comp) =>
+                              comp.name ==
+                              Provider.of<Player>(context, listen: false)
+                                  .stonks[index]
+                                  .name)
                           .stonksData
                           .last
                           .open,
@@ -246,7 +278,13 @@ class StonksItemView extends StatelessWidget {
                   onTap: () {
                     Provider.of<Player>(context, listen: false).buyStonk(
                       stonks[index].name,
-                      Provider.of<Gazprom>(context, listen: false)
+                      Provider.of<Companies>(context, listen: false)
+                          .companies
+                          .firstWhere((comp) =>
+                              comp.name ==
+                              Provider.of<Player>(context, listen: false)
+                                  .stonks[index]
+                                  .name)
                           .stonksData
                           .last
                           .open,

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/consts/vtb_colors.dart';
-import 'package:vtb_hackathon/data/companies/gazprom.dart';
+import 'package:vtb_hackathon/data/companies/companies.dart';
 import 'package:vtb_hackathon/data/player/player.dart';
-import 'package:vtb_hackathon/data/stonks/stonks_item.dart';
+import 'package:vtb_hackathon/home/finance_screen/finance_item.dart';
 import 'package:vtb_hackathon/home/main_screen/stonks_chart.dart';
-import 'package:vtb_hackathon/widgets/half_long_button.dart';
 import 'package:vtb_hackathon/widgets/long_button.dart';
 
 class FinanceItemView extends StatelessWidget {
@@ -16,7 +15,13 @@ class FinanceItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<StonksItem> stonks = Provider.of<Player>(context).stonks;
+    List<FinanceItem> stonks = [
+      FinanceItem(
+        name: Provider.of<Companies>(context).companies[0].name,
+        buyAmount:
+            Provider.of<Companies>(context).companies[0].stonksData.last.open,
+      ),
+    ];
     return Scaffold(
       body: Column(
         children: [
@@ -75,7 +80,11 @@ class FinanceItemView extends StatelessWidget {
                 Text(
                   // TODO добавить другие компании
 
-                  Provider.of<Gazprom>(context)
+                  Provider.of<Companies>(context, listen: false)
+                      .companies
+                      .firstWhere((comp) =>
+                          comp.name ==
+                          Provider.of<Player>(context).stonks[index].name)
                       .stonksData
                       .last
                       .open
@@ -92,7 +101,7 @@ class FinanceItemView extends StatelessWidget {
 
           const Expanded(child: SizedBox()),
 
-          // продажа и покупка акций
+          // покупка акций
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Row(
@@ -101,7 +110,9 @@ class FinanceItemView extends StatelessWidget {
                   onTap: () {
                     Provider.of<Player>(context, listen: false).buyStonk(
                       stonks[index].name,
-                      Provider.of<Gazprom>(context, listen: false)
+                      Provider.of<Companies>(context, listen: false)
+                          .companies
+                          .firstWhere((comp) => comp.name == stonks[index].name)
                           .stonksData
                           .last
                           .open,

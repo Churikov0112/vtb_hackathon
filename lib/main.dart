@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vtb_hackathon/data/companies/companies.dart';
 import 'package:vtb_hackathon/data/companies/gazprom.dart';
 import 'package:vtb_hackathon/data/player/player.dart';
 import 'package:vtb_hackathon/data/system/date.dart';
@@ -30,16 +31,13 @@ class MyApp extends StatelessWidget {
           value: FeedViewModel(),
         ),
         ChangeNotifierProvider.value(
-          value: FinanceViewModel(),
-        ),
-        ChangeNotifierProvider.value(
           value: OtherViewModel(),
         ),
         ChangeNotifierProvider.value(
           value: Date(),
         ),
         ChangeNotifierProvider.value(
-          value: Gazprom(),
+          value: Companies(),
         ),
       ],
       child: MaterialApp(

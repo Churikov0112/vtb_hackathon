@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vtb_hackathon/data/companies/gazprom.dart';
+import 'package:vtb_hackathon/data/companies/companies.dart';
+import 'package:vtb_hackathon/data/player/player.dart';
 
 // класс для купленных пользователем акций
 class FinanceItem {
@@ -14,8 +15,22 @@ class FinanceItem {
   // Цена покупки акций
   double buyAmount;
 
-  double percentOfIncreasing(BuildContext context) {
+  String imageURI(BuildContext context, String name) {
     // TODO добавить другие компании
-    return Provider.of<Gazprom>(context, listen: false).percentOfIncreasing;
+    return Provider.of<Companies>(context, listen: false)
+        .companies
+        .firstWhere((company) => company.name == name)
+        .imageURI;
+  }
+
+  double percentOfIncreasing(BuildContext context, String name) {
+    // TODO добавить другие компании
+    return Provider.of<Companies>(context, listen: false)
+        .percentOfIncreasing(name);
+  }
+
+  // TODO добавить другие компании
+  void buyStonk(String name, double buyAmount, BuildContext context) {
+    Provider.of<Player>(context, listen: false).buyStonk(name, buyAmount);
   }
 }
