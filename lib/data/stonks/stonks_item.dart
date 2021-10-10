@@ -18,7 +18,6 @@ class StonksItem {
   int counter;
 
   String imageURI(BuildContext context, String name) {
-    // TODO добавить другие компании
     return Provider.of<Companies>(context, listen: false)
         .companies
         .firstWhere((company) => company.name == name)
@@ -26,7 +25,6 @@ class StonksItem {
   }
 
   double percentOfIncreasing(BuildContext context, String name) {
-    // TODO добавить другие компании
     return Provider.of<Companies>(context, listen: false)
         .percentOfIncreasing(name);
   }

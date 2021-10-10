@@ -190,24 +190,24 @@ class MainView extends StatelessWidget {
                       .toStringAsFixed(2) +
                   ' ₽',
               style: const TextStyle(
-                fontSize: 28,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(width: 10),
-            RotatedBox(
-              quarterTurns: 1,
-              child: SvgPicture.asset(
-                'lib/assets/icons/dash.svg',
-                height: 3,
-                color: VTBColors.color5,
-              ),
-            ),
-            const SizedBox(width: 10),
-            SvgPicture.asset(
-              'lib/assets/icons/pie_chart.svg',
-              color: VTBColors.color5,
-            ),
+            // const SizedBox(width: 10),
+            // RotatedBox(
+            //   quarterTurns: 1,
+            //   child: SvgPicture.asset(
+            //     'lib/assets/icons/dash.svg',
+            //     height: 3,
+            //     color: VTBColors.color5,
+            //   ),
+            // ),
+            // const SizedBox(width: 10),
+            // SvgPicture.asset(
+            //   'lib/assets/icons/pie_chart.svg',
+            //   color: VTBColors.color5,
+            // ),
             const Expanded(child: SizedBox()),
           ],
         ),
@@ -340,7 +340,7 @@ class MainView extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height -
               (MediaQuery.of(context).padding.top) -
-              386,
+              400,
           child: buildList(context, stonks),
         ),
 

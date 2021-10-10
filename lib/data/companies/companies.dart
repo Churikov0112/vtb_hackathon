@@ -9,6 +9,8 @@ class Companies with ChangeNotifier {
   List<Company> companies = [
     Company(
       name: 'Газпром',
+      description:
+          'Публичное акционерное общество «Газпром» (ПАО «Газпром») — российская транснациональная энергетическая компания, более 50 % акций которой принадлежит государству. Является холдинговой компанией Группы «Газпром».',
       imageURI: 'https://www.gazprom.ru/f/1/gazprom-logo-ru-3.png',
       stonksData: [
         ChartSampleData(
@@ -321,6 +323,8 @@ class Companies with ChangeNotifier {
     ),
     Company(
       name: 'Apple',
+      description:
+          'Apple Inc. (бывшая Apple Computer, Inc., в переводе с англ. — "яблоко") - американская технологическая компания с офисом в Купертино ( Калифорния ), которая проектирует и разрабатывает бытовую электронику, программное обеспечение и онлайн-сервисы. Является первой американской компанией, чья капитализация превзошла \$1 трлн.',
       imageURI: 'https://miro.medium.com/max/1140/0*Ui5MlPFZS4xYwTn2.jpg',
       stonksData: [
         ChartSampleData(
@@ -633,6 +637,8 @@ class Companies with ChangeNotifier {
     ),
     Company(
       name: 'Microsoft',
+      description:
+          'Microsoft – мировой лидер в области информационных технологий, поставляющий широкий диапазон устройств и сервисов, программного обеспечения и ИТ-услуг. Это одна из крупнейших в мире корпораций, работающая в более чем 190 странах мира. В России Microsoft действует с 1992 года, головной офис компании находится в Москве.',
       imageURI:
           'https://pbs.twimg.com/profile_images/1072427015612063744/H2-TQKDY.jpg',
       stonksData: [
@@ -946,6 +952,8 @@ class Companies with ChangeNotifier {
     ),
     Company(
       name: 'РКК "Энергия',
+      description:
+          'ПАО "РКК "Энергия" осуществляет деятельность в ракетно-космической отрасли начиная с 1946 года - с даты образования коллектива разработчиков баллистических ракет дальнего действия во главе с Главным конструктором ракетно-космических систем и основоположником практической космонавтики С. П. Королёвым.',
       imageURI: 'https://clck.ru/Y6qdG',
       stonksData: [
         ChartSampleData(
@@ -1258,6 +1266,8 @@ class Companies with ChangeNotifier {
     ),
     Company(
       name: 'Coca Cola',
+      description:
+          'The Coca-Cola Company — американская пищевая компания, крупнейший мировой производитель и поставщик концентратов, сиропов и безалкогольных напитков. Наиболее известным продуктом компании является напиток Coca-Cola. Входит в список Fortune 500 по итогам 2020 года (88-е место). Штаб-квартира находится в столице штата Джорджия, Атланте.',
       imageURI: 'https://clck.ru/Y6xkc',
       stonksData: [
         ChartSampleData(
@@ -1570,6 +1580,8 @@ class Companies with ChangeNotifier {
     ),
     Company(
       name: 'Яндекс',
+      description:
+          '«Я́ндекс» — российская транснациональная компания в отрасли информационных технологий, чьё головное юридическое лицо зарегистрировано в Нидерландах, владеющая одноимённой системой поиска в интернете, интернет-порталом и веб-службами в нескольких странах.',
       imageURI: 'https://clck.ru/Y6xyf',
       stonksData: [
         ChartSampleData(
@@ -1882,6 +1894,8 @@ class Companies with ChangeNotifier {
     ),
     Company(
       name: 'Bank of America',
+      description:
+          'Bank of America — компания по оказанию финансовых услуг, одна из крупнейших банковских холдинговых компаний Соединённых Штатов Америки. Оказывает широкий спектр банковских услуг частным и юридическим лицам. У компании насчитывается 47 млн клиентов, 4600 розничных отделений и 16 тыс.',
       imageURI: 'https://clck.ru/Y6yfc',
       stonksData: [
         ChartSampleData(
@@ -2194,6 +2208,8 @@ class Companies with ChangeNotifier {
     ),
     Company(
       name: 'Tesla',
+      description:
+          'Tesla специализируется на производстве электромобилей и развитии технологий для эффективного хранения электроэнергии. Название компании - дань уважения известному физику Николе Тесле. Начиная с 2005 года компания выпустила пять моделей электромобилей марки Tesla: Roadster, Model S, Model X, Model 3 и Model Y.',
       imageURI: 'https://clck.ru/Y6yjJ',
       stonksData: [
         ChartSampleData(
@@ -2506,6 +2522,8 @@ class Companies with ChangeNotifier {
     ),
     Company(
       name: 'BMW',
+      description:
+          'Концерн BMW Group, в который входят бренды BMW, Mini, Rolls-Royce и BMW Motorrad, является ведущим мировым производителем автомобилей и мотоциклов, а также поставщиком финансовых услуг и услуг по обеспечению мобильности премиум-класса. Штат компании насчитывает порядка 125 000 сотрудников в подразделениях по всему миру.',
       imageURI:
           'https://st3.depositphotos.com/1017908/16841/i/600/depositphotos_168411426-stock-photo-3d-rendering-bmw-logo-bmw.jpg',
       stonksData: [

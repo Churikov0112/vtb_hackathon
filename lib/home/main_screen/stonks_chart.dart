@@ -5,7 +5,9 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vtb_hackathon/data/companies/companies.dart';
 import 'package:vtb_hackathon/data/stonks/chart_sample_data.dart';
 
+// ignore: must_be_immutable
 class StonksChart extends StatefulWidget {
+  // ignore: use_key_in_widget_constructors
   StonksChart(this.companyName);
 
   String companyName;
@@ -19,8 +21,6 @@ class _StonksChartState extends State<StonksChart> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO добавить другие компании
-    // List<ChartSampleData> data = Provider.of<Gazprom>(context).stonksData;
     List<ChartSampleData> data = Provider.of<Companies>(context)
         .companies
         .firstWhere((company) => company.name == widget.companyName)

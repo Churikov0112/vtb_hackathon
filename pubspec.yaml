@@ -26,6 +26,11 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/good_cat.png
+    - assets/images/bad_cat.png
+    - assets/images/logo.png
+    - assets/images/grechka.jpg
+    
     - lib/assets/icons/flame.svg
     - lib/assets/icons/home.svg
     - lib/assets/icons/finance.svg

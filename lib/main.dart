@@ -7,6 +7,15 @@ import 'package:vtb_hackathon/home/feed_screen/feed_view_model.dart';
 import 'package:vtb_hackathon/home/home_view.dart';
 import 'package:vtb_hackathon/home/home_view_model.dart';
 import 'package:vtb_hackathon/home/other_screen/other_view_model.dart';
+import 'package:vtb_hackathon/onboarding/auth/auth_form_screen.dart';
+import 'package:vtb_hackathon/onboarding/cats/cat_phrases_model.dart';
+import 'package:vtb_hackathon/onboarding/end/end_screen.dart';
+import 'package:vtb_hackathon/onboarding/goals/edit_goal_screen.dart';
+import 'package:vtb_hackathon/onboarding/goals/goal_screen_model.dart';
+import 'package:vtb_hackathon/onboarding/learning/learning_item_screen.dart';
+import 'package:vtb_hackathon/onboarding/learning/learning_screen.dart';
+import 'package:vtb_hackathon/onboarding/learning/learning_screen_first_model.dart';
+import 'package:vtb_hackathon/onboarding/learning/learning_screen_second_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,12 +46,30 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Companies(),
         ),
+        ChangeNotifierProvider.value(
+          value: GoalScreenModel(),
+        ),
+        ChangeNotifierProvider.value(
+          value: LearningScreenFirstModel(),
+        ),
+        ChangeNotifierProvider.value(
+          value: CatPhrasesModel(),
+        ),
+        ChangeNotifierProvider.value(
+          value: LearningScreenSecondModel(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
-        home: HomeView(),
+        home: AuthFormScreen(),
+        routes: {
+          EndScreen.routeName: (ctx) => EndScreen(),
+          EditGoalScreen.routeName: (ctx) => EditGoalScreen(),
+          LearningScreen.routeName: (ctx) => LearningScreen(),
+          LearningItemScreen.routeName: (ctx) => LearningItemScreen(),
+        },
       ),
     );
   }

@@ -16,7 +16,6 @@ class FinanceItem {
   double buyAmount;
 
   String imageURI(BuildContext context, String name) {
-    // TODO добавить другие компании
     return Provider.of<Companies>(context, listen: false)
         .companies
         .firstWhere((company) => company.name == name)
@@ -24,12 +23,10 @@ class FinanceItem {
   }
 
   double percentOfIncreasing(BuildContext context, String name) {
-    // TODO добавить другие компании
     return Provider.of<Companies>(context, listen: false)
         .percentOfIncreasing(name);
   }
 
-  // TODO добавить другие компании
   void buyStonk(String name, double buyAmount, BuildContext context) {
     Provider.of<Player>(context, listen: false).buyStonk(name, buyAmount);
   }

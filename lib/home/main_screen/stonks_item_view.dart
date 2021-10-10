@@ -72,7 +72,6 @@ class StonksItemView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  // TODO добавить другие компании
                   stonks[index].buyAmount.toStringAsFixed(
                       2), // stonks[index].nowAmount.toStringAsFixed(2) + " ₽",
                   style: const TextStyle(
@@ -100,8 +99,6 @@ class StonksItemView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  // TODO добавить другие компании
-
                   Provider.of<Companies>(context)
                       .companies
                       .firstWhere((comp) =>
@@ -166,7 +163,6 @@ class StonksItemView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  // TODO добавить другие компании
                   ((Provider.of<Companies>(context)
                                   .companies
                                   .firstWhere((comp) =>
@@ -207,8 +203,6 @@ class StonksItemView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  // TODO добавить другие компании
-
                   ((Provider.of<Companies>(context, listen: false)
                                       .companies
                                       .firstWhere((comp) =>
@@ -243,7 +237,7 @@ class StonksItemView extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: Row(
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () async {
                     Navigator.of(context).pop();
                     Provider.of<Player>(context, listen: false).sellStonk(
@@ -274,7 +268,7 @@ class StonksItemView extends StatelessWidget {
                   ),
                 ),
                 const Expanded(child: SizedBox()),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     Provider.of<Player>(context, listen: false).buyStonk(
                       stonks[index].name,

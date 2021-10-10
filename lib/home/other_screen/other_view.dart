@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vtb_hackathon/consts/vtb_colors.dart';
+import 'package:vtb_hackathon/home/other_screen/achievments_view.dart';
+import 'package:vtb_hackathon/home/other_screen/rating_view.dart';
 
 class OtherView extends StatelessWidget {
   const OtherView({Key? key}) : super(key: key);
@@ -76,10 +78,32 @@ class OtherView extends StatelessWidget {
         otherListTile(context, 'Анализ портфеля', Icons.pie_chart),
         const SizedBox(height: 10),
 
-        otherListTile(context, 'Достижения', Icons.kitesurfing),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const AcievmentsView(),
+              ),
+            );
+          },
+          child: otherListTile(
+            context,
+            'Достижения',
+            Icons.kitesurfing,
+          ),
+        ),
         const SizedBox(height: 10),
 
-        otherListTile(context, 'Рейтинг', Icons.bar_chart),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const RatingView(),
+              ),
+            );
+          },
+          child: otherListTile(context, 'Рейтинг', Icons.bar_chart),
+        ),
         const SizedBox(height: 10),
 
         otherListTile(context, 'Маскоты', Icons.help),

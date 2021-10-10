@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vtb_hackathon/consts/vtb_colors.dart';
 import 'package:vtb_hackathon/data/player/player.dart';
+import 'package:vtb_hackathon/onboarding/end/end_screen.dart';
 import 'package:vtb_hackathon/widgets/long_button.dart';
 
+// ignore: use_key_in_widget_constructors
 class TargetsDrawer extends StatelessWidget {
   Widget targetListTile(
     String title,
@@ -60,17 +62,26 @@ class TargetsDrawer extends StatelessWidget {
               Provider.of<Player>(context).freeMoney >= cost
                   ? Padding(
                       padding: const EdgeInsets.only(top: 20),
-                      child: LongButton(
-                          VTBColors.color7,
-                          true,
-                          const Text(
-                            'Выполнить',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => EndScreen(),
                             ),
-                          )),
+                          );
+                        },
+                        child: LongButton(
+                            VTBColors.color7,
+                            true,
+                            const Text(
+                              'Выполнить',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            )),
+                      ),
                     )
                   : Container(),
             ],

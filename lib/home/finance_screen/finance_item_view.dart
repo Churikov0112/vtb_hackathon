@@ -59,7 +59,7 @@ class FinanceItemView extends StatelessWidget {
           // Цена сейчас
           Padding(
             padding: const EdgeInsets.only(
-              top: 10,
+              top: 30,
               left: 15,
               right: 15,
             ),
@@ -89,6 +89,35 @@ class FinanceItemView extends StatelessWidget {
             ),
           ),
 
+          const SizedBox(height: 10),
+
+          // Черточка
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Divider(
+              thickness: 0.5,
+              color: Colors.grey,
+            ),
+          ),
+          const SizedBox(height: 10),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: SingleChildScrollView(
+              child: SizedBox(
+                height: (MediaQuery.of(context).size.height -
+                        MediaQuery.of(context).padding.top) /
+                    5,
+                child: Text(
+                  Provider.of<Companies>(context, listen: false)
+                      .companies
+                      .firstWhere((comp) => comp.name == stonk.name)
+                      .description,
+                ),
+              ),
+            ),
+          ),
+
           const Expanded(child: SizedBox()),
 
           // покупка акций
@@ -96,7 +125,7 @@ class FinanceItemView extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: Row(
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     Provider.of<Player>(context, listen: false).buyStonk(
                       stonk.name,
